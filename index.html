@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CBTI 网梗人格测试</title>
+  <meta name="description" content="CBTI 网梗人格测试：基于七个中文互联网气质维度，为你匹配最像的网梗人格。" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="announcement-bar">
+    <span>NEW</span>
+    已支持 7 维度网梗匹配，完成测试后即可解锁你的专属梗人格
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#" class="header-logo">
+        <span class="header-logo-icon">C</span>
+        <span class="header-logo-text">CBTI</span>
+      </a>
+      <nav class="header-nav">
+        <a href="#" data-nav="home" class="header-link is-active">CBTI 测试</a>
+        <a href="#types" class="header-link">网梗图鉴</a>
+        <a href="#faq" class="header-link">常见问题</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="screen active" id="intro-screen">
+      <div class="hero card">
+        <div class="eyebrow">CBTI 网梗人格测试 · 娱乐向</div>
+        <h1>CBTI 网梗人格测试 — 你是哪种互联网气质？</h1>
+        <p class="sub">
+          21 道主线题，基于 7 个中文互联网气质维度交叉分析，
+          为你匹配最贴合的网梗人格标签。测试仅供娱乐，请勿当真。
+        </p>
+
+        <div class="hero-grid">
+          <div class="mini-panel">
+            <h3>七大维度</h3>
+            <ul id="dimensions-preview"></ul>
+          </div>
+          <div class="mini-panel">
+            <h3>关于测试</h3>
+            <ul>
+              <li>共 21 道场景题，约 3–5 分钟</li>
+              <li>每题影响 1–3 个气质维度</li>
+              <li>结果可导出为分享海报（后续可加）</li>
+              <li>当前版本为静态前端，可直接改数据文件</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn-primary" id="start-test-btn">开始测试</button>
+        </div>
+      </div>
+
+      <section class="types-section" id="types">
+        <a href="#types" class="types-title-link">
+          <h2 class="types-title">全部网梗图鉴</h2>
+          <span class="types-title-arrow">→</span>
+        </a>
+        <p class="types-subtitle" id="types-subtitle">共 0 种网梗人格，点击查看详情</p>
+        <div class="types-grid" id="types-grid"></div>
+      </section>
+
+      <section class="faq-section" id="faq">
+        <h2 class="faq-title">常见问题</h2>
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>CBTI 是什么？和 MBTI / SBTI 有什么区别？</summary>
+            <p>
+              CBTI 是一个娱乐向网梗人格测试。它不尝试做心理学诊断，而是把你的答题倾向翻译成中文互联网语境中的“梗气质”结果。
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>题库、维度和结果类型可以自己改吗？</summary>
+            <p>
+              可以。当前页面的数据全部拆在独立文件里：<code>data/dimensions.js</code>、<code>data/questions.js</code>、<code>data/types.js</code>。
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>结果是怎么匹配出来的？</summary>
+            <p>
+              先根据答题累计 7 个维度得分，再和每个网梗类型预设的目标区间进行匹配。命中度最高的类型会作为主结果输出。
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>这套前端适合继续扩展吗？</summary>
+            <p>
+              适合。后续你可以继续加：隐藏人格、结果海报、分享链接、MBTI × CBTI 交叉解读，或做双人版关系测试。
+            </p>
+          </details>
+        </div>
+      </section>
+    </section>
+
+    <section class="screen" id="quiz-screen">
+      <div class="quiz-shell">
+        <div class="progress-card">
+          <div class="progress-top">
+            <span id="progress-text">第 1 / 21 题</span>
+            <span id="progress-percent">5%</span>
+          </div>
+          <div class="progress-bar">
+            <span id="progress-bar-fill"></span>
+          </div>
+        </div>
+
+        <div class="quiz-card card">
+          <div class="quiz-eyebrow">CBTI 测试进行中</div>
+          <h2 id="question-title">题目加载中...</h2>
+          <div class="options-list" id="options-list"></div>
+          <div class="quiz-actions">
+            <button class="btn-secondary" id="prev-question-btn" type="button">上一题</button>
+            <button class="btn-primary" id="next-question-btn" type="button">下一题</button>
+            <button class="btn-secondary" id="quiz-back-home-btn" type="button">返回首页</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="result-screen">
+      <div class="result-layout">
+        <div class="result-main card">
+          <div class="eyebrow">CBTI 结果</div>
+          <h1 id="result-name">你的网梗人格</h1>
+          <p class="result-tagline" id="result-tagline">结果文案加载中...</p>
+          <div class="result-desc" id="result-desc"></div>
+          <div class="result-actions">
+            <button class="btn-primary" id="restart-btn">重新测试</button>
+            <button class="btn-secondary" id="back-home-btn">返回首页</button>
+          </div>
+        </div>
+
+        <aside class="result-side card">
+          <h3>你的七维得分</h3>
+          <div class="score-bars" id="score-bars"></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">C</span>
+        <span class="footer-name">CBTI 网梗人格测试</span>
+      </div>
+      <nav class="footer-nav">
+        <a href="#types">网梗图鉴</a>
+        <a href="#faq">常见问题</a>
+      </nav>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 CBTI · 仅供娱乐，请勿当真</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./data/dimensions.js"></script>
+  <script src="./data/questions.js"></script>
+  <script src="./data/types.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
